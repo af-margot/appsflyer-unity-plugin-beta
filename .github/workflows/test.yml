@@ -20,7 +20,7 @@ jobs:
         # Diff HEAD with the previous commit
         $diff = git diff --name-only HEAD^ HEAD
 
-        $SourceDiff = $diff | Where-Object {'build_unity_packate.sh' -or 'strict_mode_build_package.sh' }
+        $SourceDiff = $diff | Where-Object {'build_unity_package.sh' -or 'strict_mode_build_package.sh' }
         $HasDiff = $SourceDiff.Length -gt 0 
 
         Write-Host "name=docs_changed::$HasDiff" >>$GITHUB_OUTPUT
