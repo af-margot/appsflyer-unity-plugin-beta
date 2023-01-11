@@ -1,8 +1,7 @@
 name: check headers
 on:
   pull_request:
-    types:
-      - opened
+    types: [opened, synchronize]
     branches:
       - 'master'
 
