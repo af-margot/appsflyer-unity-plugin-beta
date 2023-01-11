@@ -12,7 +12,7 @@ jobs:
     outputs:
       docs_changed: ${{ steps.check_file_changed.outputs.docs_changed }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 5
     - shell: pwsh
@@ -24,7 +24,7 @@ jobs:
         $SourceDiff = $diff | Where-Object {$_ -match '.sh$' }
         $HasDiff = $SourceDiff.Length -gt 0
 
-        Write-Host "::set-output name=docs_changed::$HasDiff"
+        Write-Host "name=docs_changed::$HasDiff" >>$GITHUB_OUTPUT
 
   # Run the job only with "docs_changed" equals "True"
   conditional_job:
