@@ -22,8 +22,8 @@ jobs:
 
         $SourceDiff = $diff | Where-Object  { $_ -match '^deploy/'}
         $HasDiff = $SourceDiff.Length -gt 0 
-
-        Write-Host "name=docs_changed::$HasDiff" >>$env:GITHUB_OUTPUT
+        
+        echo "docs_changed=$HasDiff" >> $env:GITHUB_OUTPUT
         echo $HasDiff
 
   # Run the job only with "docs_changed" equals "True"
