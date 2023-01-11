@@ -8,6 +8,7 @@ PACKAGE_NAME="appsflyer-unity-plugin-6.6.0.unitypackage"
 mkdir -p $DEPLOY_PATH
 
 #add comment to test github actions
+#new line
 # Build the .unitypackage
 /opt/Unity/Editor/Unity
 -gvh_disable \
