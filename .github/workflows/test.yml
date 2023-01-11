@@ -1,8 +1,7 @@
 name: check headers
 on:
   pull_request:
-    types:
-      - opened
+    types: [opened, synchronize]
     branches:
       - 'master'
 
@@ -12,7 +11,7 @@ jobs:
     outputs:
       docs_changed: ${{ steps.check_file_changed.outputs.docs_changed }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 5
     - shell: pwsh
@@ -21,10 +20,11 @@ jobs:
         # Diff HEAD with the previous commit
         $diff = git diff --name-only HEAD^ HEAD
 
-        $SourceDiff = $diff | Where-Object {$_ -match '.sh$' }
-        $HasDiff = $SourceDiff.Length -gt 0
-
-        Write-Host "::set-output name=docs_changed::$HasDiff"
+        $SourceDiff = $diff | Where-Object  { $_ -match '^deploy/'}
+        $HasDiff = $SourceDiff.Length -gt 0 
+        
+        echo "docs_changed=$HasDiff" >> $env:GITHUB_OUTPUT
+        echo $HasDiff
 
   # Run the job only with "docs_changed" equals "True"
   conditional_job:
